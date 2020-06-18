@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mis publicaciones {% endblock %}
+
+{% block body %}
+      {{ parent() }}
+      <div class="container">
+            <div class="row">
+                  <div class="col-md-2 blog-main">
+                        <a href="/"><i class="fa fa-arrow-left"></i> Volver</a>
+                  </div>
+                  <div class="col-md-8 blog-main">
+                      {% for p in post  %}
+                      <div class="blog-post">
+                            <img src="https://www.kasparov.ru/content/materials/202006/5EE878D703C08.jpg" alt="{{ p.titulo }}" style="float:right;width:123px;height:auto;">
+                            <h4 class="text-dark">{{ p.titulo }}</h4>
+                            <p class="blog-post-meta">{{ p.fechapublicacion | date('d-m-Y') }} <a href="{{ path('see_only_post', {id : p.id })  }}">Leer más</a></p>
+                            <hr>
+                      </div>
+
+                      {% endfor %}
+                  </div>
+                  <div class="col-md-2 blog-main">
+                  </div>
+            </div>
+      </div>
+
+{% endblock %}
+
+

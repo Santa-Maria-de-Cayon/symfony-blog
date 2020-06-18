@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Entrar {% endblock %}
+
+{% block body %}
+
+    {#
+    {{ dump(app.user) }}
+    #}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+
+    <div class="container" style="margin-top: 6%;">
+
+        <div style="width:70%;margin-left:15%;">
+                   <a href="/"><i class="fa fa-arrow-left"></i> Volver</a>
+           <h2 class="blog-header-logo text-dark">Por favor, entre</h2><br>
+           <label for="inputEmail">Email</label>
+           <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus><br>
+           <label for="inputPassword">Contraseña</label>
+           <input type="password" name="password" id="inputPassword" class="form-control" required><br>
+
+           <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+
+
+               <div class="checkbox mb-3">
+                   <label>
+                       <input type="checkbox" name="_remember_me"> Recuérdame
+                   </label>
+               </div>
+
+           <button class="btn btn-lg btn-primary" type="submit">
+               Entrar
+           </button>
+            <div>
+           <div>
+</form>
+{% endblock %}

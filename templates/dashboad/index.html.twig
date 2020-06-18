@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} - Dashboard {% endblock %}
+{% block stylesheets %} {{ parent() }} {% endblock %}
+{% block body %}
+    {{ parent() }}
+
+    <div class="container" style="margin-top: 61px;margin-bottom: 31px;">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                {% for post in pagination  %}
+                    <div class="blog-post">
+                        <img src="https://www.kasparov.ru/content/materials/202006/5EE878D703C08.jpg" alt="{{ post.titulo }}" style="float:right;width:123px;height:auto;">
+                        <h4 class="text-dark">{{ post.titulo }}</h4>
+                        <p class="blog-post-meta">{{ post.fecha_publicacion | date('d-m-Y') }} <a href="{{ path('see_only_post', {id : post.id })  }}">Leer más</a></p>
+
+                        <p>Creado por {{ post.nombre }}.</p>
+                        <hr>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <aside class="col-md-4 blog-sidebar">
+                <div class="p-3">
+                    <h4 class="font-italic">Últimos 7 comentarios</h4>
+                    {% for com in latestcom %}
+                       <div class="p-3 mb-3 bg-light rounded">
+                           <p class="mb-0">{{ com.comentario }}</p>
+                           <p class="mini">{{ com.fecha_publicacion | date('d-m-Y') }} / {{ com.nombre }} / <a href="{{ path('see_only_post', {id:com.id} ) }}">Leer post..</a></p>
+                       </div>
+                   {% endfor %}
+
+                </div>
+                <div class="p-3">
+                    <h4 class="font-italic">Lista usuarios</h4>
+                    {% for userio in usuarios %}
+                        <p>{{ userio.nombre }}</p>
+                    {% endfor %}
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+{#     ~~~~~ assets('dfgsdfgsdfg'~post.foto )
+     <div class="count">
+        {{ pagination.getTotalItemCount }}
+     </div>
+     <table>
+        <tr>
+
+         <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+         <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}
+         </th>
+         <th{% if pagination.isSorted(['a.date', 'a.time']) %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Release', ['a.date', 'a.time']) }}
+         </th>
+      </tr>
+
+
+      {% for article in pagination %}
+         <tr {% if loop.index is odd %}class="color"{% endif %}>
+            <td>{{ article.id }}</td>
+            <td>{{ article.titulo }}</td>
+            <td>{{ article.fecha_publicacion | date('Y-m-d') }}</td>
+            <td>{{ article.foto }}</td>
+         </tr>
+      {% endfor %}
+
+   </table>
+   <div class="navigation">
+      {{ knp_pagination_render(pagination) }}
+   </div>
+#}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}  {% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {%  set likesdelpost = post.likes | split('.') %}
+
+    <div class="container" style="margin-top: 111px;margin-bottom: 111px;">
+        <div class="row">
+            <div class="col-md-2 blog-main">
+                <a href="/"><i class="fa fa-arrow-left"></i> Volver</a>
+            </div>
+            <div class="col-md-10 blog-main">
+                <div class="blog-post">
+                    <img src="{{ asset('img/')~post.foto }}" alt="{{ post.titulo }}" height="auto" width="40%" style="float:right;">
+                    <h2 class="blog-post-title">{{ post.titulo }}</h2>
+                    {% if app.user.id|default(null) %}
+                         {% if app.user.id in likesdelpost %}
+                             <div class="tegusto">Te gusto este post</div>
+                         {% else %}
+                             <p id="response"><a href="#" data-action="{{ post.id }}" id="custom_likes">❤ Likes</a></p>
+                         {%  endif %}
+                    {% endif %}
+                    <p class="blog-post-meta">{{ post.fechapublicacion | date }} <a href="#">Autor Mark</a></p>
+                </div>
+            </div>
+            <div class="col-md-2 blog-main">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+       <div class="row">
+            <div class="col-md-2 blog-main"></div>
+            <div class="col-md-10 blog-main">
+                {{ form(for) }}
+            </div>
+            <div class="col-md-2 blog-main"></div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Crear publicación {% endblock %}
+
+{% block body %}
+
+       <div class="container" style="margin-top: 6%;">
+
+           <div style="width:70%;margin-left:15%;">
+               <a href="/">Volver</a>
+               <div style="text-align: center;"><h2 class="blog-header-logo text-dark">Crear publicacion</h2></div>
+           {{ form(form) }}
+           </div>
+       </div>
+{% endblock %}
